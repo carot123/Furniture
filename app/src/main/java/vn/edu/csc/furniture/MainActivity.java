@@ -1,12 +1,17 @@
 package vn.edu.csc.furniture;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.SearchView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -14,17 +19,31 @@ public class MainActivity extends AppCompatActivity {
     BottomNavigationView navView;
     boolean status=false;
     MenuItem menuItem;
+    Toolbar toolbar;
+    SearchView searchView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
         navView = findViewById(R.id.nav_view);
 
         loadFragment(new AccountFragment());
 
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         navView.setSelectedItemId(R.id.navigation_dashboard);
+
+        searchView = findViewById(R.id.search_vew);
+        searchView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, SearchActivity.class);
+                startActivity(intent);
+            }
+        });
 
     }
 
@@ -36,22 +55,22 @@ public class MainActivity extends AppCompatActivity {
             Fragment fragment;
             switch (item.getItemId()) {
                 case R.id.navigation_dashboard:
-                    getSupportActionBar().setTitle("Dashboard");
+                    //getSupportActionBar().setTitle("Dashboard");
                     fragment = new DashboardFragment();
                     loadFragment(fragment);
                     return true;
                 case R.id.navigation_home:
-                    getSupportActionBar().setTitle("Home");
+                    //getSupportActionBar().setTitle("Home");
                     fragment = new HomeFragment();
                     loadFragment(fragment);
                     return true;
                 case R.id.navigation_notifications:
-                    getSupportActionBar().setTitle("Notification");
+                    //getSupportActionBar().setTitle("Notification");
                     fragment = new NotificationsFragment();
                     loadFragment(fragment);
                     return true;
                 case R.id.navigation_account:
-                    getSupportActionBar().setTitle("Profile");
+                    //getSupportActionBar().setTitle("Profile");
                     fragment = new AccountFragment();
                     loadFragment(fragment);
                     return true;
