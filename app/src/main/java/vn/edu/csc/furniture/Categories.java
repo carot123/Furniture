@@ -12,14 +12,20 @@ import java.util.ArrayList;
 public class Categories {
     String name;
     ArrayList<Furniture> arrayList;
-    Bitmap image;
+    String image;
+
+
+    public Categories(String name, String image) {
+        this.name = name;
+        this.image = image;
+    }
 
     public Categories(String name, ArrayList<Furniture> arrayList) {
         this.name = name;
         this.arrayList = arrayList;
     }
 
-    public Categories(String name, ArrayList<Furniture> arrayList, Bitmap image) {
+    public Categories(String name, ArrayList<Furniture> arrayList, String image) {
         this.name = name;
         this.arrayList = arrayList;
         this.image = image;
@@ -41,26 +47,13 @@ public class Categories {
         this.arrayList = arrayList;
     }
 
-    public Bitmap getImage() {
+    public String getImage() {
         return image;
     }
 
-    public void setImage(Bitmap image) {
+    public void setImage(String image) {
         this.image = image;
     }
 
-    public static Bitmap convertStringToBitmapFromAccess(Context context, String filename){
 
-        AssetManager assetManager = context.getAssets();
-
-        try {
-            InputStream is = assetManager.open(filename);
-            Bitmap bitmap = BitmapFactory.decodeStream(is);
-            return  bitmap;
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        return null;
-    }
 }

@@ -1,5 +1,6 @@
 package vn.edu.csc.furniture;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,7 +21,7 @@ public class HomeFragment extends Fragment {
     ListView listView;
     ArrayList<Furniture> arrayList;
     FurnitureAdapter furnitureAdapter;
-
+    Utils utils;
     public HomeFragment() {
         // Required empty public constructor
     }
@@ -30,6 +31,7 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        utils = new Utils(getContext());
         return inflater.inflate(R.layout.fragment_home, container, false);
     }
 
@@ -39,7 +41,7 @@ public class HomeFragment extends Fragment {
 
         listView = view.findViewById(R.id.listView);
 
-        arrayList = getMockData();
+        arrayList = utils.getMockData();
 
         furnitureAdapter = new FurnitureAdapter(getContext(),arrayList);
 
@@ -50,22 +52,21 @@ public class HomeFragment extends Fragment {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Utils.furnitureHistory.add(arrayList.get(i));
                 Toast.makeText(getContext(), i+"", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getActivity(), DetailActivity.class);
+                intent.putExtra("furniture", arrayList.get(i));
+                startActivity(intent);
             }
         });
+
+
+
     }
 
-    public ArrayList<Furniture> getMockData(){
-        ArrayList<Furniture> tmp = new ArrayList<>();
-        tmp.add(new Furniture(getString(R.string.name_product_one), getString(R.string.product_one),Furniture.convertStringToBitmapFromAccess(getContext(),"hinh_1.png")));
-        tmp.add(new Furniture(getString(R.string.name_product_tow), getString(R.string.product_tow),Furniture.convertStringToBitmapFromAccess(getContext(),"hinh_2.png")));
-        tmp.add(new Furniture(getString(R.string.name_product_three), getString(R.string.product_three),Furniture.convertStringToBitmapFromAccess(getContext(),"hinh_3.png")));
-        tmp.add(new Furniture(getString(R.string.name_product_four), getString(R.string.product_four),Furniture.convertStringToBitmapFromAccess(getContext(),"hinh_4.png")));
-        tmp.add(new Furniture(getString(R.string.name_product_five), getString(R.string.product_five),Furniture.convertStringToBitmapFromAccess(getContext(),"hinh_5.png")));
-        tmp.add(new Furniture(getString(R.string.name_product_one), getString(R.string.product_one),Furniture.convertStringToBitmapFromAccess(getContext(),"hinh_1.png")));
-        tmp.add(new Furniture(getString(R.string.name_product_tow), getString(R.string.product_tow),Furniture.convertStringToBitmapFromAccess(getContext(),"hinh_2.png")));
-        tmp.add(new Furniture(getString(R.string.name_product_three), getString(R.string.product_three),Furniture.convertStringToBitmapFromAccess(getContext(),"hinh_3.png")));
-        tmp.add(new Furniture(getString(R.string.name_product_four), getString(R.string.product_four),Furniture.convertStringToBitmapFromAccess(getContext(),"hinh_4.png")));
-        tmp.add(new Furniture(getString(R.string.name_product_five), getString(R.string.product_five),Furniture.convertStringToBitmapFromAccess(getContext(),"hinh_5.png")));
-        return tmp;
+
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        utils.WriteToFileInternal(arrayList);
     }
 }

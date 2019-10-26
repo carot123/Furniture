@@ -15,10 +15,11 @@ import java.util.ArrayList;
 
 public class FurnitureAdapterGrid extends ArrayAdapter<Categories> {
     ArrayList<Categories> arrayList;
-
+    Utils utils ;
     public FurnitureAdapterGrid(@NonNull Context context, @NonNull ArrayList<Categories> objects) {
         super(context, 0, objects);
         arrayList = objects;
+        utils = new Utils(getContext());
     }
 
     @NonNull
@@ -35,7 +36,7 @@ public class FurnitureAdapterGrid extends ArrayAdapter<Categories> {
 
         textView.setText(categories.getName());
 
-        imageView.setImageBitmap(categories.getImage());
+        imageView.setImageBitmap(utils.convertStringToBitmapFromAccess(categories.getImage()));
 
         return convertView;
     }

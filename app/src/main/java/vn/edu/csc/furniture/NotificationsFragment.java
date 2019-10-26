@@ -39,7 +39,7 @@ public class NotificationsFragment extends Fragment {
 
         listView = view.findViewById(R.id.listView);
 
-        Utils utils = new Utils();
+        Utils utils = new Utils(getContext());
 
         arrayList = utils.getFurnitureHistory();
 

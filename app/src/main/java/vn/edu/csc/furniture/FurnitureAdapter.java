@@ -14,10 +14,13 @@ import androidx.annotation.Nullable;
 import java.util.ArrayList;
 
 public class FurnitureAdapter extends ArrayAdapter<Furniture> {
+    Utils utils ;
+
     ArrayList<Furniture> arrayList;
     public FurnitureAdapter(@NonNull Context context, @NonNull ArrayList<Furniture> objects) {
         super(context, 0, objects);
         arrayList = objects;
+        utils = new Utils(getContext());
     }
 
     @NonNull
@@ -34,7 +37,7 @@ public class FurnitureAdapter extends ArrayAdapter<Furniture> {
 
         textView.setText(furniture.getName());
         textView2.setText(furniture.getDescription());
-        imageView.setImageBitmap(furniture.getImage());
+        imageView.setImageBitmap(utils.convertStringToBitmapFromAccess(furniture.getImage()));
 
         return convertView;
     }

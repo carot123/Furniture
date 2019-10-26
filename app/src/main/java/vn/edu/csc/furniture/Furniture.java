@@ -12,9 +12,9 @@ import java.io.Serializable;
 public class Furniture implements Serializable {
     String name;
     String description;
-    Bitmap image;
+    String image;
 
-    public Furniture(String name, String description, Bitmap image) {
+    public Furniture(String name, String description, String image) {
         this.name = name;
         this.description = description;
         this.image = image;
@@ -36,26 +36,13 @@ public class Furniture implements Serializable {
         this.description = description;
     }
 
-    public Bitmap getImage() {
+    public String getImage() {
         return image;
     }
 
-    public void setImage(Bitmap image) {
+    public void setImage(String image) {
         this.image = image;
     }
 
-    public static Bitmap convertStringToBitmapFromAccess(Context context, String filename){
 
-        AssetManager assetManager = context.getAssets();
-
-        try {
-            InputStream is = assetManager.open(filename);
-            Bitmap bitmap = BitmapFactory.decodeStream(is);
-            return  bitmap;
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        return null;
-    }
 }
