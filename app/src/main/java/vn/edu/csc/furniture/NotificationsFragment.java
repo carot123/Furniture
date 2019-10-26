@@ -1,5 +1,6 @@
 package vn.edu.csc.furniture;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
@@ -51,6 +53,10 @@ public class NotificationsFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Utils.furnitureHistory.add(arrayList.get(i));
+                Toast.makeText(getContext(), i+"", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getActivity(), DetailActivity.class);
+                intent.putExtra("furniture", arrayList.get(i));
+                startActivity(intent);
             }
         });
     }
