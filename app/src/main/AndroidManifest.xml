@@ -21,7 +21,7 @@
             android:theme="@style/AppTheme" />
         <activity
             android:name=".MainActivity"
-            android:label="@string/title_activity_main"
+            android:label="@string/furniture"
             android:theme="@style/AppTheme1"
             android:windowSoftInputMode="stateHidden">
             <intent-filter>

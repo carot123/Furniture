@@ -26,6 +26,7 @@ public class DashboardFragment extends Fragment {
     ArrayList<Categories> arrayList;
     FurnitureAdapterGrid furnitureAdapterGrid;
     Utils utils;
+    DBHelper dbHelper;
     public DashboardFragment() {
         // Required empty public constructor
     }
@@ -36,6 +37,7 @@ public class DashboardFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         utils = new Utils(getContext());
+        dbHelper = new DBHelper(getContext());
         return inflater.inflate(R.layout.fragment_dashboard, container, false);
     }
 
@@ -47,7 +49,8 @@ public class DashboardFragment extends Fragment {
 
         gridView = view.findViewById(R.id.gridView);
 
-        arrayList = utils.getMockDataCategories();
+        //arrayList = utils.getMockDataCategories();
+        arrayList = dbHelper.getALLCategories();
 
         furnitureAdapterGrid = new FurnitureAdapterGrid(getContext(),arrayList);
 

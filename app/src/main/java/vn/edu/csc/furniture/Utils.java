@@ -77,7 +77,7 @@ public class Utils {
         return null;
     }
 
-    public ArrayList<Furniture> getMockData(){
+    public ArrayList<Furniture> getMockDataFuniture(){
         ArrayList<Furniture> tmp = new ArrayList<>();
         tmp.add(new Furniture(context.getString(R.string.name_product_one),     context.getString(R.string.product_one),   "hinh_1.png"));
         tmp.add(new Furniture(context.getString(R.string.name_product_tow),     context.getString(R.string.product_tow),   "hinh_2.png"));

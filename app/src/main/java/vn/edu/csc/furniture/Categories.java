@@ -7,17 +7,40 @@ import android.graphics.BitmapFactory;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Categories {
+public class Categories implements Serializable {
     String name;
     ArrayList<Furniture> arrayList;
     String image;
+    int id;
 
+
+    public Categories(String name, ArrayList<Furniture> arrayList, String image, int id) {
+        this.name = name;
+        this.arrayList = arrayList;
+        this.image = image;
+        this.id = id;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public Categories(String name, String image) {
         this.name = name;
         this.image = image;
+    }
+
+    public Categories(String name, String image, int id) {
+        this.name = name;
+        this.image = image;
+        this.id = id;
     }
 
     public Categories(String name, ArrayList<Furniture> arrayList) {

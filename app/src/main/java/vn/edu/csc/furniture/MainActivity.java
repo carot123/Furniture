@@ -1,6 +1,7 @@
 package vn.edu.csc.furniture;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -16,18 +17,51 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import java.util.concurrent.atomic.AtomicBoolean;
+
 public class MainActivity extends AppCompatActivity {
     BottomNavigationView navView;
     boolean status=false;
     MenuItem menuItem;
     Toolbar toolbar;
     EditText searchView;
+    DBHelper dbHelper;
+    int isWrite=0;
+    String filename = "setting";
 
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        SharedPreferences sharedPreferences = getSharedPreferences(filename, MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putInt("isWrite", 1);
+        editor.apply();
+        editor.commit();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        SharedPreferences sharedPreferences = getSharedPreferences(filename, MODE_PRIVATE);
+        isWrite = sharedPreferences.getInt("isWrite",0);
+        if(isWrite == 0) {
+            dbHelper.insertCategories();
+            dbHelper.insertFurniture();
+        }
+
+
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        dbHelper = new DBHelper(MainActivity.this);
+        dbHelper.createTable();
+
+
+
 
         navView = findViewById(R.id.nav_view);
 

@@ -27,6 +27,7 @@ public class CategoriesFragment extends Fragment {
     ArrayList<Furniture> arrayList;
     FurnitureAdapter furnitureAdapter;
     Utils utils;
+    DBHelper dbHelper;
 
     public CategoriesFragment() {
         // Required empty public constructor
@@ -47,6 +48,7 @@ public class CategoriesFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         utils = new Utils(getContext());
+        dbHelper = new DBHelper(getContext());
         return inflater.inflate(R.layout.fragment_categories, container, false);
     }
 
@@ -59,6 +61,7 @@ public class CategoriesFragment extends Fragment {
         listView = view.findViewById(R.id.listView);
 
         arrayList = utils.getFurnitureFromCategories(bundle.getInt("category"));
+        //arrayList = dbHelper.getALLCategories();
 
         furnitureAdapter = new FurnitureAdapter(getContext(),arrayList);
 
