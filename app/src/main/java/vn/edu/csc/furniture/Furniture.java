@@ -15,6 +15,10 @@ public class Furniture implements Serializable {
     String image;
     Categories categories;
     int id;
+    int categotiesID;
+
+    public Furniture() {
+    }
 
     public Furniture(String name, String description, String image) {
         this.name = name;
@@ -68,5 +72,13 @@ public class Furniture implements Serializable {
 
     public void setCategories(Categories categories) {
         this.categories = categories;
+    }
+
+    public int getCategotiesID() {
+        return categotiesID;
+    }
+
+    public void setCategotiesID(int categotiesID) {
+        this.categotiesID = categotiesID;
     }
 }

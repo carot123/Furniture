@@ -39,6 +39,8 @@ public class Utils {
 
     public ArrayList<Furniture> getFurnitureHistory(){ return this.furnitureHistory; }
 
+    //lab 45
+
     public void WriteToFileInternal(ArrayList<Furniture> arrayList){
         try {
             File file = new File(context.getFilesDir(), filename);
@@ -77,6 +79,8 @@ public class Utils {
         return null;
     }
 
+    //lab 23
+
     public ArrayList<Furniture> getMockDataFuniture(){
         ArrayList<Furniture> tmp = new ArrayList<>();
         tmp.add(new Furniture(context.getString(R.string.name_product_one),     context.getString(R.string.product_one),   "hinh_1.png"));
@@ -90,21 +94,6 @@ public class Utils {
         tmp.add(new Furniture(context.getString(R.string.name_product_four),    context.getString(R.string.product_four),  "hinh_4.png"));
         tmp.add(new Furniture(context.getString(R.string.name_product_five),    context.getString(R.string.product_five),  "hinh_5.png"));
         return tmp;
-    }
-
-    public Bitmap convertStringToBitmapFromAccess(String filename){
-
-        AssetManager assetManager = context.getAssets();
-
-        try {
-            InputStream is = assetManager.open(filename);
-            Bitmap bitmap = BitmapFactory.decodeStream(is);
-            return  bitmap;
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        return null;
     }
 
     public ArrayList<Categories> getMockDataCategories(){
@@ -145,6 +134,24 @@ public class Utils {
         }
 
         return tmp;
+    }
+
+    //lab 07
+
+    // utils
+    public Bitmap convertStringToBitmapFromAccess(String filename){
+
+        AssetManager assetManager = context.getAssets();
+
+        try {
+            InputStream is = assetManager.open(filename);
+            Bitmap bitmap = BitmapFactory.decodeStream(is);
+            return  bitmap;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return null;
     }
 
 

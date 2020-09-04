@@ -60,9 +60,6 @@ public class MainActivity extends AppCompatActivity {
         dbHelper = new DBHelper(MainActivity.this);
         dbHelper.createTable();
 
-
-
-
         navView = findViewById(R.id.nav_view);
 
         loadFragment(new AccountFragment());
