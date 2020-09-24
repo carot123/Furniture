@@ -5,6 +5,11 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -12,7 +17,7 @@ public class DBHelper {
     Context context;
     Utils utils;
 
-    String dbName = "FurnitureDB.db";
+    String dbName = "FurnitureDB1.db";
 
 
     public DBHelper(Context context) {
@@ -76,7 +81,8 @@ public class DBHelper {
 //    }
 
     public ArrayList<Furniture> getALLFurniture() {
-        SQLiteDatabase db = openDB();
+       // SQLiteDatabase db = openDB();
+        SQLiteDatabase db = openDatabase();
         ArrayList<Furniture> arr = new ArrayList<>();
         String sql = "select * from tblFurniture";
         Cursor csr = db.rawQuery(sql, null);
@@ -181,6 +187,32 @@ public class DBHelper {
 //        return new UserModel( name, hometown,flag, id);
 //    }
 
+    public SQLiteDatabase openDatabase() {
+        File dbFile = context.getDatabasePath(dbName);
 
+        if (!dbFile.exists()) {
+            try {
+                copyDatabase(dbFile);
+            } catch (IOException e) {
+                throw new RuntimeException("Error creating source database", e);
+            }
+        }
+
+        return SQLiteDatabase.openDatabase(dbFile.getPath(), null, SQLiteDatabase.OPEN_READONLY);
+    }
+
+    private void copyDatabase(File dbFile) throws IOException {
+        InputStream is = context.getAssets().open(dbName);
+        OutputStream os = new FileOutputStream(dbFile);
+
+        byte[] buffer = new byte[1024];
+        while (is.read(buffer) > 0) {
+            os.write(buffer);
+        }
+
+        os.flush();
+        os.close();
+        is.close();
+    }
 
 }

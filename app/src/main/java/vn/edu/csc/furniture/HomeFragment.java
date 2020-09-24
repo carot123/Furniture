@@ -65,6 +65,8 @@ public class HomeFragment extends Fragment {
         //lab 6
         //arrayList = dbHelper.getALLFurniture();
 
+        Log.i("ABC", arrayList.size()+"");
+
         //lab 78
         arrayList = new ArrayList<>();
 
